@@ -15,4 +15,12 @@
             Review next steps of this tutorial.
         </a>
     </div>
+    <div>
+        <form (ngSubmit)="sendPrompt()">
+            <input name="prompt" [(ngModel)]="prompt"/>
+        </form>
+    </div>
+    <div>
+        <pre>{{ answer }}</pre>
+    </div>
 </main>
