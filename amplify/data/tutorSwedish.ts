@@ -17,7 +17,7 @@ export const handler: Schema["tutorSwedish"]["functionHandler"] = async (
 
   // Invoke model
   const input = {
-    modelId: process.env.OPUS_MODEL_ID,
+    modelId: process.env.MISTRAL_MODEL_ID,
     contentType: "application/json",
     accept: "application/json",
     body: JSON.stringify({

@@ -7,12 +7,17 @@ specifies that any user authenticated via an API key can "create", "read",
 "update", and "delete" any "Todo" records.
 =========================================================================*/
 
-export const OPUS_MODEL_ID = 'anthropic.claude-opus-4-5-20251101-v1:0';
+// KRISTIAN_NOTE - Anthropic Opus does not support "model invocation with on-demand throughput".
+// I think that means programmatically sending on-demand prompts to an Amplify app requires a different model.
+// We need one that supports the Swedish language, so let's try Mistral.
+// export const OPUS_MODEL_ID = 'anthropic.claude-opus-4-5-20251101-v1:0';
+export const MISTRAL_MODEL_ID = 'mistral.mistral-large-3-675b-instruct'
 
 export const tutorSwedishFunction = defineFunction({
   entry: "./tutorSwedish.ts",
   environment: {
-    OPUS_MODEL_ID,
+    // OPUS_MODEL_ID,
+    MISTRAL_MODEL_ID,
   }
 })
 
