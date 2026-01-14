@@ -37,6 +37,7 @@ export const handler: Schema["tutorSwedish"]["functionHandler"] = async (
       ],
       max_tokens: 4096,
       temperature: 0.5,
+      timeout: 20000,
     }),
   } as InvokeModelCommandInput;
 
