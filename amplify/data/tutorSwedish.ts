@@ -44,9 +44,17 @@ export const handler: Schema["tutorSwedish"]["functionHandler"] = async (
   const command = new InvokeModelCommand(input);
 
   const response = await client.send(command);
+  // KRISTIAN_TROUBLESHOOTING - Is the response being parsed ok?  Can't set breakpoints outside of src/...
+  console.log('response:')
+  console.log(response)
 
-  // Parse the response and return the generated haiku
+  // Parse the response and return the generated response
   const data = JSON.parse(Buffer.from(response.body).toString());
+
+  // KRISTIAN_TROUBLESHOOTING - It seems to be having trouble reading the [0] indexing of the response
+  // Does the data even exist?
+  console.log('data:')
+  console.log (data)
 
   return data.content[0].text;
 };
