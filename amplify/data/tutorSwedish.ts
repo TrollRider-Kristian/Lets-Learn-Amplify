@@ -37,7 +37,6 @@ export const handler: Schema["tutorSwedish"]["functionHandler"] = async (
       ],
       max_tokens: 4096,
       temperature: 0.5,
-      timeout: 20000,
     }),
   } as InvokeModelCommandInput;
 
@@ -45,16 +44,10 @@ export const handler: Schema["tutorSwedish"]["functionHandler"] = async (
 
   const response = await client.send(command);
   // KRISTIAN_TROUBLESHOOTING - Is the response being parsed ok?  Can't set breakpoints outside of src/...
+  // The console log does not even appear. :(  How do I log the data from the backend?
   console.log('response:')
   console.log(response)
 
   // Parse the response and return the generated response
-  const data = JSON.parse(Buffer.from(response.body).toString());
-
-  // KRISTIAN_TROUBLESHOOTING - It seems to be having trouble reading the [0] indexing of the response
-  // Does the data even exist?
-  console.log('data:')
-  console.log (data)
-
-  return data.content[0].text;
+  return JSON.parse(Buffer.from(response?.body).toString());
 };
