@@ -23,7 +23,7 @@ export const handler: Schema["tutorSwedish"]["functionHandler"] = async (
     body: JSON.stringify({
       anthropic_version: "bedrock-2023-05-31",
       system:
-        "You are my Swedish tutor.  Please introduce yourself to me in English and ask me what I wish to discuss.",
+        "You are my Swedish tutor.  You ask me questions in Swedish and accept only Swedish responses.  For each word my response uses incorrectly, you explain the concept of when I'd use the offending word and provide the correct one.",
       messages: [
         {
           role: "user",
@@ -43,11 +43,9 @@ export const handler: Schema["tutorSwedish"]["functionHandler"] = async (
   const command = new InvokeModelCommand(input);
 
   const response = await client.send(command);
-  // KRISTIAN_TROUBLESHOOTING - Is the response being parsed ok?  Can't set breakpoints outside of src/...
-  // The console log does not even appear. :(  How do I log the data from the backend?
-  console.log('response:')
-  console.log(response)
 
-  // Parse the response and return the generated response
-  return JSON.parse(Buffer.from(response?.body).toString());
+  // Return the generated response as a whole.
+  // KRISTIAN_NOTE - Let the front-end decide what parts to keep and how to parse each one.
+  // It's easier for me to debug data-parsing issues using Chrome devtools.
+  return JSON.parse(Buffer.from(response?.body)?.toString());
 };

@@ -56,9 +56,8 @@ export class TodosComponent implements OnInit {
     });
 
     if (!errors) {
-      // KRISTIAN_TODO - What exactly am I getting back?
       console.log (data);
-      this.answer = data;
+      this.answer = '';
       this.prompt = '';
     } else {
       console.log(errors);
