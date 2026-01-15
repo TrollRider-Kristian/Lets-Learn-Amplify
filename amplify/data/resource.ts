@@ -30,7 +30,7 @@ const schema = a.schema({
   tutorSwedish: a
     .query()
     .arguments({ prompt: a.string().required() })
-    .returns(a.json()) // KRISTIAN_TODO - If this doesn't return a JSON object in the front end, then revert it to string.
+    .returns(a.string()) // KRISTIAN_TODO - Changing the type to a.json() gives a string in todos.component.ts.  Why?
     .authorization((allow) => [allow.publicApiKey()])
     .handler(a.handler.function(tutorSwedishFunction)),
 });

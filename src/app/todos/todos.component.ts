@@ -56,7 +56,7 @@ export class TodosComponent implements OnInit {
     });
 
     if (!errors) {
-      console.log (data);
+      console.log (JSON.parse(data as string)); // KRISTIAN_NOTE - This gives me the JSON object I want.
       this.answer = '';
       this.prompt = '';
     } else {
