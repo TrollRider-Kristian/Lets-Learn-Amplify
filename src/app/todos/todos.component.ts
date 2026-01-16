@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { generateClient } from 'aws-amplify/data';
@@ -13,50 +13,22 @@ const client = generateClient<Schema>();
   templateUrl: './todos.component.html',
   styleUrl: './todos.component.css',
 })
-export class TodosComponent implements OnInit {
-  todos: any[] = [];
+export class TodosComponent {
   prompt: string = '';
   answer: string | null = null;
 
-  ngOnInit(): void {
-    this.listTodos();
-  }
-
-  listTodos() {
-    try {
-      // KRISTIAN_NOTE - This doesn't return any TODOs unless I deploy this app.
-      // Websocket connection to the URL on my amplify_outputs.json file failed because that URL does not exist anymore.
-      // The amplify_outupts.json takes its url from the deployed Amplify app and is produced when I deploy said app.
-      // This means that I will fail to populate any TODO's every time I want to test locally unless/until I actually deploy my app.
-      // That also means every other operation involving a connection to AWS (eg. prompting an AWS Bedrock LLM) will also fail unless I deploy the app.
-      client.models.Todo.observeQuery().subscribe({
-        next: ({ items, isSynced }) => {
-          this.todos = items;
-        },
-      });
-    } catch (error) {
-      console.error('error fetching todos from observeQuery', error);
-    }
-  }
-
-  createTodo() {
-    try {
-      client.models.Todo.create({
-        content: window.prompt('Todo content'),
-      });
-      this.listTodos();
-    } catch (error) {
-      console.error('error creating todos', error);
-    }
-  }
-
+  // KRISTIAN_NOTE - Websocket connection to the URL on my amplify_outputs.json file failed because that URL does not exist anymore.
+  // The amplify_outupts.json takes its url from the deployed Amplify app and is produced when I deploy said app.
+  // This means that I will fail to receive a response every time I want to test locally unless/until I actually deploy my app.
+  // That also means every other operation involving a connection to AWS (eg. prompting an AWS Bedrock LLM) will also fail unless I deploy the app.
   async sendPrompt() {
     const { data, errors } = await client.queries.tutorSwedish({
       prompt: this.prompt,
     });
 
     if (!errors) {
-      console.log (JSON.parse(data as string)); // KRISTIAN_NOTE - This gives me the JSON object I want.
+      // console.log (JSON.parse(data as string)); // KRISTIAN_NOTE - This gives me the JSON object I want.
+      console.log (data);
       this.answer = '';
       this.prompt = '';
     } else {

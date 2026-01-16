@@ -20,6 +20,8 @@ export const handler: Schema["tutorSwedish"]["functionHandler"] = async (
     modelId: process.env.MISTRAL_MODEL_ID,
     contentType: "application/json",
     accept: "application/json",
+    // KRISTIAN_NOTE - The input body for the function handler in tutorSwedish.ts needs to be a string to be compatible with
+    // the BlobPayloadInputTypes data type.  It accepts strings and arrays but not straight up JSON objects.
     body: JSON.stringify({
       anthropic_version: "bedrock-2023-05-31",
       system:
