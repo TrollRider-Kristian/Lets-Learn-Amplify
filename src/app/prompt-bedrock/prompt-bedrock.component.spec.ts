@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TodosComponent } from './todos.component';
+import { PromptBedrockComponent } from './prompt-bedrock.component';
 
-describe('TodosComponent', () => {
-  let component: TodosComponent;
-  let fixture: ComponentFixture<TodosComponent>;
+describe('PromptBedrockComponent', () => {
+  let component: PromptBedrockComponent;
+  let fixture: ComponentFixture<PromptBedrockComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TodosComponent]
+      imports: [PromptBedrockComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(TodosComponent);
+    fixture = TestBed.createComponent(PromptBedrockComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -10,10 +10,10 @@ const client = generateClient<Schema>();
   selector: 'app-todos',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './todos.component.html',
-  styleUrl: './todos.component.css',
+  templateUrl: './prompt-bedrock.component.html',
+  styleUrl: './prompt-bedrock.component.css',
 })
-export class TodosComponent {
+export class PromptBedrockComponent {
   prompt: string = '';
   answer: string | null = null;
 
@@ -27,7 +27,6 @@ export class TodosComponent {
     });
 
     if (!errors) {
-      // console.log (JSON.parse(data as string)); // KRISTIAN_NOTE - This gives me the JSON object I want.
       console.log (data);
       this.answer = '';
       this.prompt = '';
