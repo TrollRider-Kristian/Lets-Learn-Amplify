@@ -7,7 +7,7 @@ import type { Schema } from '../../../amplify/data/resource';
 const client = generateClient<Schema>();
 
 @Component({
-  selector: 'app-todos',
+  selector: 'app-prompt-bedrock',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './prompt-bedrock.component.html',
@@ -27,8 +27,8 @@ export class PromptBedrockComponent {
     });
 
     if (!errors) {
-      console.log (data);
-      this.answer = '';
+      console.log (data); // KRISTIAN_NOTE - If the response doesn't populate correctly in the app, then troubleshoot this console log.
+      this.answer = data;
       this.prompt = '';
     } else {
       console.log(errors);

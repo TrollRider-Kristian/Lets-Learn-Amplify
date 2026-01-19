@@ -1,10 +1,8 @@
 import { type ClientSchema, a, defineData, defineFunction } from '@aws-amplify/backend';
 
 /*== STEP 1 ===============================================================
-The section below creates a Todo database table with a "content" field. Try
-adding a new "isDone" field as a boolean. The authorization rule below
-specifies that any user authenticated via an API key can "create", "read",
-"update", and "delete" any "Todo" records.
+The section below creates a Swedish tutor function and a database table we
+might need later in the capstone project.
 =========================================================================*/
 
 export const MISTRAL_MODEL_ID = 'mistral.mistral-large-3-675b-instruct'
@@ -17,11 +15,6 @@ export const tutorSwedishFunction = defineFunction({
 })
 
 const schema = a.schema({
-  Todo: a
-    .model({
-      content: a.string(),
-    })
-    .authorization((allow) => [allow.publicApiKey()]),
   tutorSwedish: a
     .query()
     .arguments({ prompt: a.string().required() })
