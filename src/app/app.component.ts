@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { PromptBedrockComponent } from './prompt-bedrock/prompt-bedrock.component';
 import { Amplify } from 'aws-amplify';
 import outputs from '../../amplify_outputs.json';
+import { PromptBedrockComponent } from './prompt-bedrock/prompt-bedrock.component';
+import { SelectTopicForPracticeComponent } from "./select-topic-for-practice/select-topic.component";
 
 Amplify.configure(outputs);
 
@@ -11,8 +11,16 @@ Amplify.configure(outputs);
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [RouterOutlet, PromptBedrockComponent],
+  imports: [PromptBedrockComponent, SelectTopicForPracticeComponent],
 })
 export class AppComponent {
-  title = 'amplify-angular-template';
+  title = 'AI Swedish Whisperer';
+  subtitle = 'A Tutor Assistant for Learners of the Swedish Language';
+  current_topic: string | null = "";
+  request_new_topic() {
+    this.current_topic = '';
+  }
+  accept_new_topic(new_topic: string | null) {
+    this.current_topic = new_topic;
+  }
 }

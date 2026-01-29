@@ -49,13 +49,13 @@ export const handler: Schema["tutorSwedish"]["functionHandler"] = async (
   // Get the generated response as a JSON object.
   const data = JSON.parse(Buffer.from(response?.body)?.toString());
 
-  // Since the tutorial, the response has changed format.  It was data.content[0].text,
+  // KRISTIAN_NOTE - Since the tutorial, the response has changed format.  It was data.content[0].text,
   // but now (as of January 19, 2026), it's data.choices[0].message.content.
   // https://docs.amplify.aws/angular/build-a-backend/data/custom-business-logic/connect-bedrock/
   if (data?.choices?.length > 0) {
     return data?.choices[0]?.message?.content;
   } else {
-    // KRISTIAN_NOTE - If the data changes format again, then return the whole thing so I can console log
+    // If the data changes format again, then return the whole thing so I can console log
     // and troubleshoot it on the front-end.
     return data;
   }
