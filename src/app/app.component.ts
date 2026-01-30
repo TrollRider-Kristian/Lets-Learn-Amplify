@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Amplify } from 'aws-amplify';
 import outputs from '../../amplify_outputs.json';
@@ -11,16 +12,19 @@ Amplify.configure(outputs);
   standalone: true,
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  imports: [PromptBedrockComponent, SelectTopicForPracticeComponent],
+  imports: [CommonModule, PromptBedrockComponent, SelectTopicForPracticeComponent],
 })
 export class AppComponent {
   title = 'AI Swedish Whisperer';
   subtitle = 'A Tutor Assistant for Learners of the Swedish Language';
-  current_topic: string | null = "";
+  private _current_topic: string | null = null;
+  public get current_topic() {
+    return this._current_topic;
+  }
   request_new_topic() {
-    this.current_topic = '';
+    this._current_topic = null;
   }
   accept_new_topic(new_topic: string | null) {
-    this.current_topic = new_topic;
+    this._current_topic = new_topic;
   }
 }

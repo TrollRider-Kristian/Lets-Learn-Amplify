@@ -9,6 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 @Component({
     selector: 'select-topic-for-practice',
     templateUrl: 'select-topic.component.html',
+    styleUrl: "select-topic.component.css",
     standalone: true,
     imports: [
         CommonModule,
@@ -26,7 +27,14 @@ export class SelectTopicForPracticeComponent {
     // KRISTIAN_TODO - Do I want this to be an array of strings?
     // Or do I want some id's to go along with this?
     // KRISTIAN_TODO - Do I want this to be public?  Or private with a getter?
-    conversation_topics: string[] = []
+    // KRISTIAN_TODO - Need MORE TOPICS! :)
+    conversation_topics: string[] = [
+        "Hobbies",
+        "Work",
+        "University",
+        "Time",
+    ]
+    // KRISTIAN_TODO - Allow custom topic from the user.
     submit_new_topic(new_topic: string | null) {
         this.change_topic.emit (new_topic);
     }

@@ -1,7 +1,13 @@
 <main>
     <h1>{{title}}</h1>
     <h2>{{subtitle}}</h2>
-    <!--KRISTIAN_TODO - Ng-if's go here...-->
-    <select-topic-for-practice (change_topic)="accept_new_topic($event)"></select-topic-for-practice>
-    <app-prompt-bedrock [topic]="current_topic" (change_topic)="request_new_topic()"></app-prompt-bedrock>
+    <select-topic-for-practice
+        *ngIf="current_topic == null"
+        (change_topic)="accept_new_topic($event)">
+    </select-topic-for-practice>
+    <app-prompt-bedrock
+        *ngIf="current_topic != null"
+        [topic]="current_topic"
+        (change_topic)="request_new_topic()">
+    </app-prompt-bedrock>
 </main>

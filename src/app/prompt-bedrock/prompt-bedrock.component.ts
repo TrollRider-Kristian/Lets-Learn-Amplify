@@ -16,7 +16,7 @@ const client = generateClient<Schema>();
 })
 export class PromptBedrockComponent implements OnInit {
   @Input({ required: true }) topic!: string | null;
-  change_topic = output<void>(); // KRISTIAN_TODO - emit an event when the user clicks the "Change Topic" button.
+  change_topic = output<void>();
   current_question: string = '';
   user_response: string = '';
   feedback: string | null = null;

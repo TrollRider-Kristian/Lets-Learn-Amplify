@@ -1,13 +1,18 @@
 <!-- prompt-bedrock.component.html -->
-<h1>Prompt Bedrock Here:</h1>
+<h2>Question from Bedrock Here:</h2>
 <div>
+    <!--KRISTIAN_TODO - Need an animation to inidicate a question is loading here...-->
+    <!--KRISTIAN_TODO - The question uses many, many, MANY words that I do NOT recognize.  Either:-->
+    <!--1. Submit, as part of my prompt a means by which to request simpler questions from Bedrock and/or-->
+    <!--2. Allow the user to hover over a specific word and get a bubble indicating its English translation.-->
     <p>{{ current_question }}</p>
-    <!-- KRISTIAN_TODO - Is this right?  How to submit as a button?-->
-    <form (ngSubmit)="solicit_feedback_for_response()">
-        <input name="prompt" [(ngModel)]="user_response"/>
-    </form>
+    <input name="prompt" [(ngModel)]="user_response"/>
+    <button mat-button (click)="solicit_feedback_for_response()">Submit Answer and Solicit Feedback</button>
 </div>
 <div>
+    <!--KRISTIAN_TODO - Need an animation to indicate that feedback is loading here...-->
+    <!--KRISTIAN_TODO - Need to bullet-point these feedback responses too!-->
+    <!--KRISTIAN_TODO - Need to DISABLE buttons while feedback is LOADING!-->
     <p>{{ feedback }}</p>
     <button mat-button (click)="pose_question_based_on_topic()">Request Follow-Up Question</button>
     <button mat-button (click)="request_another_topic ()">Go Back and Change Topic</button>

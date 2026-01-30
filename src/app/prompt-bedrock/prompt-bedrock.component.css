@@ -1,0 +1,15 @@
+input {
+    width: 1000px;
+}
+
+/* KRISTIAN_TODO - How do I feel about these button styles?? */
+button {
+    border-radius: 8px;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    color: white;
+}
+button:hover {
+    border-color: #646cff;
+}

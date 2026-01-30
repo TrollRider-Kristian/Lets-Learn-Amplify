@@ -1,9 +1,11 @@
+<mat-label>Select a Topic:</mat-label>
 <mat-form-field>
-    <mat-label>Select a Topic:</mat-label>
-    <mat-select [formControl]="user_selected_topic" required>
+    <mat-select [formControl]="user_selected_topic">
         @for (topic of conversation_topics; track topic) {
             <mat-option [value]="topic">{{topic}}</mat-option>
         }
     </mat-select>
-    <button mat-button (click)="submit_new_topic (user_selected_topic.value)"></button>
 </mat-form-field>
+<button mat-button (click)="submit_new_topic (user_selected_topic.value)">
+    Submit New Topic
+</button>
