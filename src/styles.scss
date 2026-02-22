@@ -1,0 +1,12 @@
+// KRISTIAN_NOTE - Using a theme allows the mat spinner to be visible, along with several other mat components.
+// Source - https://stackoverflow.com/a/78366545
+// Posted by Fernando Del Cantão, modified by community. See post 'Timeline' for change history
+// Retrieved 2026-02-22, License - CC BY-SA 4.0
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+body {
+    margin: 0px 50px;
+    background: linear-gradient(180deg, rgb(117, 81, 194), rgb(255, 255, 255));
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    height: 100vh;
+}

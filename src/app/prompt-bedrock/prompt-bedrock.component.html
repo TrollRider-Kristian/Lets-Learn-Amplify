@@ -10,9 +10,9 @@
     <button mat-button (click)="solicit_feedback_for_response()">Submit Answer and Solicit Feedback</button>
 </div>
 <div>
-    <!--KRISTIAN_TODO - Need an animation to indicate that feedback is loading here...-->
     <!--KRISTIAN_TODO - Need to bullet-point these feedback responses too!-->
     <!--KRISTIAN_TODO - Need to DISABLE buttons while feedback is LOADING!-->
+    <mat-progress-spinner mode="indeterminate" *ngIf="feedback_is_loading === true"></mat-progress-spinner>
     <p>{{ feedback }}</p>
     <button mat-button (click)="pose_question_based_on_topic()">Request Follow-Up Question</button>
     <button mat-button (click)="request_another_topic ()">Go Back and Change Topic</button>

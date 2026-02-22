@@ -2,6 +2,7 @@ import { Component, Input, OnInit, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { generateClient } from 'aws-amplify/data';
 import type { Schema } from '../../../amplify/data/resource';
 
@@ -10,7 +11,7 @@ const client = generateClient<Schema>();
 @Component({
   selector: 'app-prompt-bedrock',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatButtonModule],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './prompt-bedrock.component.html',
   styleUrl: './prompt-bedrock.component.css',
 })
@@ -20,6 +21,7 @@ export class PromptBedrockComponent implements OnInit {
   current_question: string = '';
   user_response: string = '';
   feedback: string | null = null;
+  feedback_is_loading: boolean = false;
 
   // KRISTIAN_NOTE - Websocket connection to the URL on my amplify_outputs.json file failed because that URL does not exist anymore.
   // The amplify_outupts.json takes its url from the deployed Amplify app and is produced when I deploy said app.
@@ -52,12 +54,14 @@ export class PromptBedrockComponent implements OnInit {
 
   // KRISTIAN_TODO - What user-event should we use to submit our response and call this function?
   // KRISTIAN_TODO - Explicitly specify ALL feedback criteria based on the Swedish concepts I have learned thus far.
-  // Use each one as an example (eg. sitt vs. sin for possessive pronouns)
+  // Use each one as an example (eg. sitt vs. sin for possessive pronouns) -> Do I need to do this?
   async solicit_feedback_for_response () {
     let prompt_with_response = 'Given the question of: ' + this.current_question +
       ', please provide feedback in English to the spelling and grammatical mistakes of each word in the following ' +
       ' user response: ' + this.user_response;
-      ;
+      
+    this.feedback_is_loading = true;
+
     const { data, errors } = await client.queries.tutorSwedish({
       prompt: prompt_with_response,
     });
@@ -69,6 +73,7 @@ export class PromptBedrockComponent implements OnInit {
     } else {
       console.log(errors);
     }
+    this.feedback_is_loading = false;
   }
 
   request_another_topic() {
