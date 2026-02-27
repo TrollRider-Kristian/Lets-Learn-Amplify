@@ -22,6 +22,7 @@ export class PromptBedrockComponent implements OnInit {
   user_response: string = '';
   feedback: string | null = null;
   feedback_is_loading: boolean = false;
+  question_is_loading: boolean = false;
 
   // KRISTIAN_NOTE - Websocket connection to the URL on my amplify_outputs.json file failed because that URL does not exist anymore.
   // The amplify_outupts.json takes its url from the deployed Amplify app and is produced when I deploy said app.
@@ -39,6 +40,8 @@ export class PromptBedrockComponent implements OnInit {
       this.user_response = '';
     }
 
+    this.question_is_loading = true;
+
     // KRISTIAN_TODO - Do I throw an error if the user gives an empty response?  Leaning towards no for now...
     const { data, errors } = await client.queries.tutorSwedish({
       prompt: prompt_to_ask,
@@ -50,6 +53,7 @@ export class PromptBedrockComponent implements OnInit {
     } else {
       console.log (errors);
     }
+    this.question_is_loading = false;
   }
 
   // KRISTIAN_TODO - What user-event should we use to submit our response and call this function?
@@ -58,7 +62,8 @@ export class PromptBedrockComponent implements OnInit {
   async solicit_feedback_for_response () {
     let prompt_with_response = 'Given the question of: ' + this.current_question +
       ', please provide feedback in English to the spelling and grammatical mistakes of each word in the following ' +
-      ' user response: ' + this.user_response;
+      ' user response: ' + this.user_response + ', and generate some keywords for the linguistic concepts discussed' +
+      ' by the feedback.';
       
     this.feedback_is_loading = true;
 

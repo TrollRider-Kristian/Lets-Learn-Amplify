@@ -1,10 +1,10 @@
 <!-- prompt-bedrock.component.html -->
 <h2>Question from Bedrock Here:</h2>
 <div>
-    <!--KRISTIAN_TODO - Need an animation to inidicate a question is loading here...-->
     <!--KRISTIAN_TODO - The question uses many, many, MANY words that I do NOT recognize.  Either:-->
     <!--1. Submit, as part of my prompt a means by which to request simpler questions from Bedrock and/or-->
     <!--2. Allow the user to hover over a specific word and get a bubble indicating its English translation.-->
+    <mat-progress-spinner mode="indeterminate" *ngIf="question_is_loading == true"></mat-progress-spinner>
     <p>{{ current_question }}</p>
     <input name="prompt" [(ngModel)]="user_response"/>
     <button mat-button (click)="solicit_feedback_for_response()">Submit Answer and Solicit Feedback</button>
