@@ -1,0 +1,14 @@
+@import '../../mixins.scss';
+
+:host {
+    display: inline-flex;
+    flex-direction: column;
+
+    :not(:first-child) {
+        margin-top: 12px;
+    }
+
+    button {
+        @include white-button-styles;
+    }
+}

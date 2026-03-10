@@ -1,0 +1,9 @@
+@import '../../mixins.scss';
+
+input {
+    width: 100%;
+}
+
+button {
+    @include white-button-styles;
+}

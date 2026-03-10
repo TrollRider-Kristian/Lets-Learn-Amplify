@@ -11,7 +11,6 @@ Amplify.configure(outputs);
   selector: 'app-root',
   standalone: true,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
   imports: [CommonModule, PromptBedrockComponent, SelectTopicForPracticeComponent],
 })
 export class AppComponent {

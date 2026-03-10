@@ -9,7 +9,7 @@ import { MatSelectModule } from '@angular/material/select';
 @Component({
     selector: 'select-topic-for-practice',
     templateUrl: 'select-topic.component.html',
-    styleUrl: "select-topic.component.css",
+    styleUrl: "select-topic.component.scss",
     standalone: true,
     imports: [
         CommonModule,

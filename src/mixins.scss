@@ -1,0 +1,11 @@
+@mixin white-button-styles {
+    border-radius: 8px;
+    border: 1px solid white;
+    cursor: pointer;
+    transition: border-color 0.25s;
+    color: white;
+
+    :hover {
+        border-color: #646cff;
+    }
+}

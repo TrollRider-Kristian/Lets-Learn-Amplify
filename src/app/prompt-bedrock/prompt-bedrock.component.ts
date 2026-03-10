@@ -13,7 +13,7 @@ const client = generateClient<Schema>();
   standalone: true,
   imports: [CommonModule, FormsModule, MatButtonModule, MatProgressSpinnerModule],
   templateUrl: './prompt-bedrock.component.html',
-  styleUrl: './prompt-bedrock.component.css',
+  styleUrl: './prompt-bedrock.component.scss',
 })
 export class PromptBedrockComponent implements OnInit {
   @Input({ required: true }) topic!: string | null;
@@ -56,13 +56,14 @@ export class PromptBedrockComponent implements OnInit {
     this.question_is_loading = false;
   }
 
-  // KRISTIAN_TODO - What user-event should we use to submit our response and call this function?
-  // KRISTIAN_TODO - Explicitly specify ALL feedback criteria based on the Swedish concepts I have learned thus far.
-  // Use each one as an example (eg. sitt vs. sin for possessive pronouns) -> Do I need to do this?
-  async solicit_feedback_for_response () {
-    let prompt_with_response = 'Given the question of: ' + this.current_question +
+  // KRISTIAN_TODO - How do I call this to test any question and answer pair?
+  // Do I support another component and call from the outside?
+  // Do I support loading question-answer pairs from file and print out a list of feedbacks?
+  // How to go about this in my app? 
+  async solicit_feedback_for_given_question_and_response (question: string, response: string) {
+    let prompt_with_response = 'Given the question of: ' + question +
       ', please provide feedback in English to the spelling and grammatical mistakes of each word in the following ' +
-      ' user response: ' + this.user_response + ', and generate some keywords for the linguistic concepts discussed' +
+      ' user response: ' + response + ', and generate some keywords for the linguistic concepts discussed' +
       ' by the feedback.';
       
     this.feedback_is_loading = true;
@@ -79,6 +80,10 @@ export class PromptBedrockComponent implements OnInit {
       console.log(errors);
     }
     this.feedback_is_loading = false;
+  }
+
+  async solicit_feedback_for_response () {
+    this.solicit_feedback_for_given_question_and_response (this.current_question, this.user_response);
   }
 
   request_another_topic() {
