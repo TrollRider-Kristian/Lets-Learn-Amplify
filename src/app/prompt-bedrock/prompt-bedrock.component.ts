@@ -17,6 +17,7 @@ const client = generateClient<Schema>();
 })
 export class PromptBedrockComponent implements OnInit {
   @Input({ required: true }) topic!: string | null;
+  @Input({ required: false }) is_custom_user_question!: boolean | null;
   change_topic = output<void>();
   current_question: string = '';
   user_response: string = '';
@@ -34,25 +35,30 @@ export class PromptBedrockComponent implements OnInit {
 
   // Take the topic and request a question from the LLM as a prompt.
   async pose_question_based_on_topic () {
-    let prompt_to_ask = 'Please ask me a question in Swedish about: ' + this.topic + '.';
-    if (this.user_response.length > 0) {
-      prompt_to_ask += 'Please make this question a follow-up to our user\'s last response of: ' + this.user_response + '.';
-      this.user_response = '';
-    }
-
     this.question_is_loading = true;
 
-    // KRISTIAN_TODO - Do I throw an error if the user gives an empty response?  Leaning towards no for now...
-    const { data, errors } = await client.queries.tutorSwedish({
-      prompt: prompt_to_ask,
-    });
-
-    if (!errors) {
-      console.log (data); // KRISTIAN_NOTE - If the response doesn't populate correctly in the app, then troubleshoot this console log.
-      this.current_question = data !== null ? data : '';
+    if (this.is_custom_user_question === true) {
+      this.current_question = typeof(this.topic) === 'string' ? this.topic : '';
     } else {
-      console.log (errors);
+      let prompt_to_ask = 'Please ask me a question in Swedish about: ' + this.topic + '.';
+      if (this.user_response.length > 0) {
+        prompt_to_ask += 'Please make this question a follow-up to our user\'s last response of: ' + this.user_response + '.';
+        this.user_response = '';
+      }
+
+      // KRISTIAN_TODO - Do I throw an error if the user gives an empty response?  Leaning towards no for now...
+      const { data, errors } = await client.queries.tutorSwedish({
+        prompt: prompt_to_ask,
+      });
+
+      if (!errors) {
+        console.log (data); // KRISTIAN_NOTE - If the response doesn't populate correctly in the app, then troubleshoot this console log.
+        this.current_question = data !== null ? data : '';
+      } else {
+        console.log (errors);
+      }
     }
+
     this.question_is_loading = false;
   }
 

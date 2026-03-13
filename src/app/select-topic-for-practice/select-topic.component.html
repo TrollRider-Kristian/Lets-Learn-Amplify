@@ -6,6 +6,11 @@
         }
     </mat-select>
 </mat-form-field>
-<button mat-button (click)="submit_new_topic (user_selected_topic.value)">
+<button mat-button (click)="submit_new_topic (user_selected_topic.value, false)">
     Submit New Topic
+</button>
+<mat-label>If You Have a Specific Question, type it here!</mat-label>
+<input name="question" [(ngModel)]="custom_user_question"/>
+<button mat-button (click)="submit_new_topic (custom_user_question, true)">
+    Submit Custom User Question
 </button>

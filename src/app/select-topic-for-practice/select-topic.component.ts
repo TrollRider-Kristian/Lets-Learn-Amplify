@@ -24,18 +24,23 @@ import { MatSelectModule } from '@angular/material/select';
 export class SelectTopicForPracticeComponent {
     user_selected_topic = new FormControl<string | null> (null, Validators.required);
     change_topic = output<string | null>();
+    is_custom_user_topic = output<boolean | null>();
+    custom_user_question: string = "";
     // KRISTIAN_TODO - Do I want this to be an array of strings?
     // Or do I want some id's to go along with this?
     // KRISTIAN_TODO - Do I want this to be public?  Or private with a getter?
-    // KRISTIAN_TODO - Need MORE TOPICS! :)
     conversation_topics: string[] = [
         "Hobbies",
         "Work",
         "University",
         "Time",
+        "Nature",
+        "Culture",
+        "Family",
+        "Art",
     ]
-    // KRISTIAN_TODO - Allow custom topic from the user.
-    submit_new_topic(new_topic: string | null) {
+    submit_new_topic(new_topic: string | null, is_custom_user_topic: boolean | null) {
         this.change_topic.emit (new_topic);
+        this.is_custom_user_topic.emit (is_custom_user_topic);
     }
 }

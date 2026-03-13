@@ -17,14 +17,22 @@ export class AppComponent {
   title = 'AI Swedish Whisperer';
   subtitle = 'A Tutor Assistant for Learners of the Swedish Language';
   private _current_topic: string | null = null;
+  private _is_custom_user_question: boolean | null = null;
   public get current_topic() {
     return this._current_topic;
   }
+  public get is_custom_user_question() {
+    return this._is_custom_user_question;
+  }
   request_new_topic() {
     this._current_topic = null;
+    this._is_custom_user_question = null;
   }
   accept_new_topic(new_topic: string | null) {
     this._current_topic = new_topic;
+  }
+  accept_custom_user_question_flag (is_custom_user_question: boolean | null) {
+    this._is_custom_user_question = is_custom_user_question;
   }
 }
 
@@ -43,9 +51,6 @@ export class AppComponent {
 // Short-circuiting some model prediction with my own learnings in Swedish might be of some help.
 
 // KRISTIAN_TODO - Also, README and documentation are important!  Update them as I go along!
-
-// KRISTIAN_TODO - Write up a report with an architectural diagram about the work I did and submit to Rajib as my capstone report.
-// What are the inputs?  What are the outputs?  Write EVERYTHING I explained to Rajib in the report.
 
 // KRISTIAN_TODO - How interactive is the application itself?  Can I ask for clarification on the response?
 
