@@ -69,8 +69,8 @@ export class PromptBedrockComponent implements OnInit {
   async solicit_feedback_for_given_question_and_response (question: string, response: string) {
     let prompt_with_response = 'Given the question of: ' + question +
       ', please provide feedback in English to the spelling and grammatical mistakes of each word in the following ' +
-      ' user response: ' + response + ', and generate some keywords for the linguistic concepts discussed' +
-      ' by the feedback.';
+      ' user response: ' + response + ', and generate some keywords for the linguistic concepts related to the user\'s mistakes' +
+      'as discussed by the feedback.';
       
     this.feedback_is_loading = true;
 
